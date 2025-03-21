@@ -13,7 +13,7 @@ createRoot(document.getElementById('root')!).render(
     <Toaster />
     <BrowserRouter>
       <Routes>
-        <Route path="categories" element={<Categories />} />
+        <Route path="/" element={<Categories />} />
         <Route path='category/:id' element={<CategoryById />} />
       </Routes>
     </BrowserRouter>

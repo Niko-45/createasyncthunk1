@@ -29,7 +29,7 @@ export default function Categories() {
 
 	function handleSave() {
 		if (idx !== null) {
-			dispatch(editCategory({ editName, idx }))
+			dispatch(editCategory({ id: idx, name: editName } as any)) 
 			setModal(false)
 			setEditName('')
 		}
@@ -37,9 +37,9 @@ export default function Categories() {
 
 	function handleAdd() {
 		if (editName.trim()) {
-			dispatch(addCategory(editName))
-			setAddModal(false) // Close add modal after adding
-			setEditName('') // Clear the input field
+			dispatch(addCategory(editName)) 
+			setAddModal(false)
+			setEditName('')
 		}
 	}
 
@@ -52,10 +52,7 @@ export default function Categories() {
 						{[1, 2, 3].map((_, index) => (
 							<div className='flex' key={index}>
 								<div className='h-2.5 bg-gray-100 rounded-full dark:bg-gray-700 w-12 mb-4'></div>
-								<div
-									className='h-2.5 bg-gray-100 rounded-full dark:bg-gray-700 w-24 mb-4'
-									key={String(Date.now())}
-								></div>
+								<div className='h-2.5 bg-gray-100 rounded-full dark:bg-gray-700 w-24 mb-4'></div>
 							</div>
 						))}
 					</div>
@@ -68,7 +65,7 @@ export default function Categories() {
 				</button>
 
 				{addModal && (
-					<div className='fixed inset-0 bg-opacity-50 flex justify-center items-center'>
+					<div className='fixed inset-0  bg-opacity-50 flex justify-center items-center'>
 						<div className='bg-white p-6 rounded-lg shadow-md w-96'>
 							<input
 								type='text'
@@ -105,7 +102,7 @@ export default function Categories() {
 						</p>
 						<button
 							className='bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600'
-							onClick={() => dispatch(deleteCategory(category.id))}
+							onClick={() => dispatch(deleteCategory(category.id))} 
 						>
 							Delete
 						</button>
@@ -120,7 +117,7 @@ export default function Categories() {
 			</ul>
 
 			{modal && (
-				<div className='fixed inset-0   flex justify-center items-center'>
+				<div className='fixed inset-0  bg-opacity-50 flex justify-center items-center'>
 					<div className='bg-white p-6 rounded-lg shadow-md w-80'>
 						<input
 							type='text'

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { axiosRequest } from '../utils/axiosRequest'
 
@@ -14,7 +15,7 @@ export const getCategories = createAsyncThunk(
 	}
 )
 
-export const deleteCategory = createAsyncThunk(
+export const deleteCategory = createAsyncThunk<void, number>(
 	'categories/deleteCategory',
 	async (categoryId, { dispatch }) => {
 		try {
@@ -25,17 +26,18 @@ export const deleteCategory = createAsyncThunk(
 		}
 	}
 )
+
 interface EditCategoryPayload {
-	editName: string
-	idx: number
+	id: number
+	name: string
 }
 export const editCategory = createAsyncThunk<any, EditCategoryPayload>(
 	'categories/editCategory',
-	async ({ editName, idx }, { dispatch }) => {
+	async ({ id, name }, { dispatch }) => {
 		try {
 			const response = await axiosRequest.put(`/categories`, {
-				id: idx,
-				name: editName,
+				id,
+				name,
 			})
 			dispatch(getCategories())
 			return response.data
@@ -44,7 +46,8 @@ export const editCategory = createAsyncThunk<any, EditCategoryPayload>(
 		}
 	}
 )
-export const addCategory = createAsyncThunk(
+
+export const addCategory = createAsyncThunk<void, string>(
 	'category/addCategory',
 	async (editName, { dispatch }) => {
 		try {
